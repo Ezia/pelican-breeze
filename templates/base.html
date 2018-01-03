@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+  <head>
+    {% block head %}
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="{{ AUTHOR_DESCRIPTION }}">
+      <meta name="author" content="{{ AUTHOR }}">
+
+      <title>{{ SITENAME }} | {{ SITEDESCRIPTION}}</title>
+
+      <link rel="shortcut icon" href="{{ FAVICON }}">
+
+      <!-- Stylesheets -->
+      <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments.css" type="text/css"/>
+      <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css" type="text/css"/>
+      <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css" type="text/css"/>
+
+      <!-- Atom feed metadata -->
+      {% if FEED_ALL_ATOM %}
+        <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
+      {% endif %}
+
+      <!-- RSS feed metadata -->
+      {% if FEED_ALL_RSS %}
+        <link href="{{ SITEURL }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed"/>
+      {% endif %}
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+      <!-- Feather icons script -->
+      <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+    {% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+
+        <a class="navbar-brand" href="{{ SITEURL }}">{{ SITENAME | upper }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ml-3">
+              <a href="{{ SITEURL }}" class="nav-link" title="Home">HOME</a>
+            </li>
+            {% if DISPLAY_PAGES_ON_MENU and pages %}
+              {% for p in pages %}
+                <li class="nav-item ml-3 {{ 'active' if p == page else '' }}">
+                  <a href="{{ SITEURL }}/{{ p.url }}" class="nav-link" title="{{ p.title }}">{{ p.title | upper }}</a>
+                </li>
+              {% endfor %}
+            {% endif %}
+
+            <!--Categories dropdown -->
+            {% if DISPLAY_CATEGORIES_ON_MENU and categories %}
+              <li class="nav-item ml-3 dropdown">
+                <a href="#" id="categories" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  CATEGORIES <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="categories">
+                  {% for cat, null in categories %}
+                    <a class="dropdown-item {{ 'active' if cat == category else '' }}" href="{{ SITEURL }}/{{ cat.url }}" title="{{ cat }}">{{ cat | upper }}</a>
+                  {% endfor %}
+                </div>
+              </li>
+            {% endif %}
+          </ul>
+
+          <!-- Links -->
+          {% if LINKS or FEED_ALL_ATOM or FEED_ALL_RSS %}
+            <ul class="navbar-nav" id="social_links">
+              {% for name, icon, link in LINKS %}
+                <li class="nav-item ml-3">
+                  <a href="{{ link }}" class="nav-link" title="{{ name }}">
+                    <i data-feather="{{ icon }}"></i>
+                  </a>
+                </li>
+              {% endfor %}
+
+              <!-- Atom feed link -->
+              {% if FEED_ALL_ATOM %}
+                <li class="nav-item ml-3">
+                  <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="nav-link" title="Atom feed">
+                    <i data-feather="rss"></i>
+                  </a>
+                </li>
+              {% endif %}
+
+              <!-- RSS feed link -->
+              {% if FEED_ALL_RSS %}
+                <li class="nav-item ml-3">
+                  <a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" class="nav-link" title="RSS feed">
+                    <i data-feather="rss"></i>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    
+    <!-- <div class="container"> -->
+      <!-- Content -->
+      <article>
+        {% block content %}
+        {% endblock %}
+      </article>
+    <!-- </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
+    <script>feather.replace()</script>
+  </body>
+</html>

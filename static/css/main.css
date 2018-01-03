@@ -1,0 +1,19 @@
+/* base.html */
+
+.navbar-brand {
+  font-size: 24pt;
+}
+
+.nav-link {
+  font-size: 15pt;
+}
+
+#social_links {
+  display: flex;
+  flex-direction: row;
+}
+
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
