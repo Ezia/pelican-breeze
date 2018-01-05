@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block head %}
+    {{ super() }}
+    <meta name="twitter:creator" content="{{ TWITTER_USERNAME }}">
+    <meta name="twitter:url" content="{{ SITEURL }}/{{ category.url }}">
+    <meta name="twitter:title" content="{{ SITENAME }} ~ {{ category }}">
+    <meta name="twitter:description" content="Articles de {{ category }}">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="{{ SITENAME }} ~ {{ category }}" />
+    <meta property="og:description" content="Articles de {{ category }}" />
+    <meta property="og:image" content="{{ AVATAR }}" />
+{% endblock head %}
+
+{% block title %}
+  <div class="container pt-5">
+    <div class="card">
+        <div class="card-header">
+          {% if articles_page.has_previous() %}
+            <h1 class="text-center display-4">{{ category }} — page {{ articles_page.number }}</h1>
+          {% else %}
+            <h1 class="text-center display-4">{{ category }}</h1>
+          {% endif %}
+        </div>
+      </div>
+  </div>
+{% endblock %}

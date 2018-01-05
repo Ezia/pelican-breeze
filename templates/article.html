@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+
+  <meta name="twitter:creator" content="{{ TWITTER_USERNAME }}">
+  <meta name="twitter:url" content="{{ SITEURL }}/{{ article.url }}">
+  <meta name="twitter:title" content="{{ SITENAME }} | {{ article.title }}">
+  <meta name="twitter:description" content="{{ article.summary }}">
+
+  <!-- Facebook Meta Data -->
+  <meta property="og:title" content="{{ SITENAME }} | {{ article.title }}" />
+  <meta property="og:description" content="{{ article.summary }}" />
+  <meta property="og:image" content="{{ AVATAR }}" />
+{% endblock head %}
+
+{% block content %}
+  <div class="card mb-3">
+    <h1 class="display-4 card-header">{{ article.title }}</h1>
+
+    <div class="card-body">
+      <article>
+        <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title }}">{{ article.title }}</a></h2>
+
+        <div>
+          {{ article.content }}
+        </div>
+
+        <div>
+          <span>By </span>
+          <a href="{{ SITEURL }}/{{ article.author.url }}">@{{ article.author }}</a>
+          <span> in </span>
+          <span><a href="{{ SITEURL }}/{{ article.category.url }}" rel="bookmark" title="Permalink to {{ article.category|striptags }}">[ {{ article.category }} ]</a></span>
+          <span>{{ article.locale_date }}</span>
+          <div>
+            <span>Tags : </span>
+            {% if article.tags %}
+              {% for tag in article.tags %}
+                <span><a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}, </a></span>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+
+  <meta name="twitter:creator" content="{{ TWITTER_USERNAME }}">
+  <meta name="twitter:url" content="{{ SITEURL }}/{{ page.url }}">
+  <meta name="twitter:title" content="{{ SITENAME }} | {{ page.title }}">
+  <meta name="twitter:description" content="">
+
+  <!-- Facebook Meta Data -->
+  <meta property="og:title" content="{{ SITENAME }} | {{ page.title }}" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="{{ AVATAR }}" />
+{% endblock head %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4 text-center">{{ page.title }}</h1>
+
+    <hr class="m-5" />
+      
+    <div class="lead">
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock %}
