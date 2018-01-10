@@ -17,3 +17,7 @@
   text-align: justify;
   text-justify: inter-word;
 }
+
+.highlight pre {
+  padding: 1em;
+}
