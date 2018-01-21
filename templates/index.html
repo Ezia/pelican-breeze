@@ -87,7 +87,18 @@
               {% if DISPLAY_SUMMARY and article.summary|length > 0 %}
                 <p class="card-text">{{ article.summary }}</p>
               {% endif %}
-              <a class="card-link" href="{{ SITEURL }}/{{ article.author.url }}">@{{ article.author }}</a> in <a class="card-link" href="{{ SITEURL }}/{{ article.category.url }}" title="Permalink to {{ article.category|striptags }}">[ {{ article.category }} ]</a> {{ article.locale_date }}
+            </div>
+            <div class="card-footer text-muted">
+              By <a href="{{ SITEURL }}/{{ article.author.url }}">@{{ article.author }}</a>, in category <a href="{{ SITEURL }}/{{ article.category.url }}" title="Permalink to {{ article.category|striptags }}">[ {{ article.category }} ]</a>
+              <br />
+              Tags: 
+              {% if article.tags %}
+                {% for tag in article.tags %}
+                  <a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}{{ "" if loop.last else ", " }} </a>
+                {% endfor %}
+              {% endif %}
+              <br />
+              Date: {{ article.locale_date }}
             </div>
           </div>
         </div>

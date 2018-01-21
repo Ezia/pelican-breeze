@@ -16,32 +16,26 @@
 
 {% block content %}
   <div class="card mb-3">
-    <h1 class="display-4 card-header">{{ article.title }}</h1>
+    <h1 class="card-header text-center">{{ article.title }}</h1>
 
     <div class="card-body">
       <article>
-        <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title }}">{{ article.title }}</a></h2>
-
-        <div>
+        <div class="lead text-justify">
           {{ article.content }}
         </div>
-
-        <div>
-          <span>By </span>
-          <a href="{{ SITEURL }}/{{ article.author.url }}">@{{ article.author }}</a>
-          <span> in </span>
-          <span><a href="{{ SITEURL }}/{{ article.category.url }}" rel="bookmark" title="Permalink to {{ article.category|striptags }}">[ {{ article.category }} ]</a></span>
-          <span>{{ article.locale_date }}</span>
-          <div>
-            <span>Tags : </span>
-            {% if article.tags %}
-              {% for tag in article.tags %}
-                <span><a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}, </a></span>
-              {% endfor %}
-            {% endif %}
-          </div>
-        </div>
       </article>
+    </div>
+    <div class="card-footer text-muted">
+      By <a href="{{ SITEURL }}/{{ article.author.url }}">@{{ article.author }}</a>, in category <a href="{{ SITEURL }}/{{ article.category.url }}" title="Permalink to {{ article.category|striptags }}">[ {{ article.category }} ]</a>
+      <br />
+      Tags: 
+      {% if article.tags %}
+        {% for tag in article.tags %}
+          <a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}{{ "" if loop.last else ", " }} </a>
+        {% endfor %}
+      {% endif %}
+      <br />
+      Date: {{ article.locale_date }}
     </div>
   </div>
 {% endblock content %}
