@@ -16,15 +16,51 @@
 
 {% block title %}
   {% if not articles_page.has_previous() %}
-    <div class="container pt-5">
-      <div class="jumbotron" id="header-background">
+    <div class="container">
+      <div class="jumbotron mt-5" id="header-background">
         <h1 class="text-center display-4">{{ SITENAME }} — {{ SITEDESCRIPTION }}</h1>
         <hr class="m-5" />
         <div class="text-justify lead">
           {{ LONGSITEDESCRIPTION }}
         </div>
+      
+        {% if CAROUSEL %}
+
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              {% for id in range(CAROUSEL|length) %}
+                <li data-target="#myCarousel" data-slide-to="{{ id }}" class="{{ 'active' if id == 0 else '' }}"></li>
+              {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+              {% for title, description, link, banner in CAROUSEL %}
+                <!-- <div class="carousel-item active"> -->
+                <div class="carousel-item {{ 'active' if loop.first else '' }}">
+                  <img src="{{ banner }}" alt="{{ title }} banner">
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1 class="my-3">{{ title }}</h1>
+                      <p class="lead my-3">{{ description }}</p>
+                      <p><a class="btn btn-lg btn-primary my-2" href="{{ link }}" role="button">Learn more</a></p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        {% endif %}
+
       </div>
     </div>
+
   {% endif %}
 
   <div class="container pt-5">
